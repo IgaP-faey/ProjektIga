@@ -58,8 +58,6 @@ public class FpsPossessionManager : MonoBehaviour
         if (Keyboard.current.qKey.wasPressedThisFrame)
             Possess((currentIndex - 1 + pawns.Length) % pawns.Length);
 
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-            Possess((currentIndex + 1) % pawns.Length);
     }
 
     public void Possess(int index, bool instant = false)
@@ -137,5 +135,11 @@ public class FpsPossessionManager : MonoBehaviour
         if (p.firstPersonController) p.firstPersonController.enabled = enable;
         if (p.characterController) p.characterController.enabled = enable;
         if (p.cineInput) p.cineInput.enabled = enable; // jeœli u¿ywasz
+        if (p.root)
+        {
+            CarryOnE[] carryScripts = p.root.GetComponentsInChildren<CarryOnE>(true);
+            for (int i = 0; i < carryScripts.Length; i++)
+                carryScripts[i].enabled = enable;
+        }
     }
 }
